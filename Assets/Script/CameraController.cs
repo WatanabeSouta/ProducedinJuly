@@ -2,18 +2,21 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    public GameObject target; // プレイヤーなど追従する対象
-    public float yOffset = -2f; // プレイヤーの位置からカメラの位置までのオフセット
+    public GameObject target; // カメラが追いかける対象（プレイヤーなど）
+    public float yOffset = -2f; // カメラの上下位置の調整
+    public float minX; // カメラが動ける左端の位置
+    public float maxX; // カメラが動ける右端の位置
 
-    // Start is called before the first frame update
+    // ゲームが始まるときに呼ばれる
     void Start()
     {
         if (target != null)
         {
-            // シーン開始時にカメラをプレイヤーの位置に移動
-            Vector3 startCameraPos = target.transform.position;
-            startCameraPos.z = -10; // カメラのz位置を固定
-            transform.position = startCameraPos + new Vector3(0, yOffset, 0);
+            // カメラの初期位置を設定
+            Vector3 startPos = target.transform.position;
+            startPos.z = -10; // カメラの奥行きを固定
+            startPos.x = Mathf.Clamp(startPos.x, minX, maxX); // カメラの左右の位置を制限
+            transform.position = startPos + new Vector3(0, yOffset, 0);
         }
         else
         {
@@ -21,17 +24,16 @@ public class CameraController : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
+    // 毎フレームごとに呼ばれる
     void Update()
     {
         if (target != null)
         {
-            // プレイヤーの位置を取得
+            // カメラの位置をプレイヤーの位置に合わせて更新
             Vector3 cameraPos = target.transform.position;
-
-            // カメラの位置をプレイヤーの位置より下に設定
             cameraPos.z = -10; // カメラの奥行きを固定
-            cameraPos.y += yOffset; // プレイヤーの位置からのオフセットを適用
+            cameraPos.x = Mathf.Clamp(cameraPos.x, minX, maxX); // 左右の制限を適用
+            cameraPos.y += yOffset; // 上下の位置調整
             transform.position = cameraPos;
         }
     }

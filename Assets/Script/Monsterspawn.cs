@@ -1,38 +1,25 @@
 using UnityEngine;
-using System.Collections;
 
-public class Monsterspawn: MonoBehaviour
+public class SpawnOnTrigger : MonoBehaviour
 {
-    public GameObject player;                // プレイヤーオブジェクト
-    public GameObject monsterPrefab;         // モンスターのプレハブ
-    public Transform[] spawnPoints;          // モンスターのスポーンポイント
-    public float triggerDistance = 10f;      // トリガーの距離
-    public float spawnInterval = 2f;         // モンスターを1体ずつスポーンさせる間隔
+    public GameObject monsterPrefab; // モンスターのプレハブ
+    public Transform spawnPoint;     // モンスターをスポーンさせる位置
+    public int numberOfMonsters = 3; // 出現させたいモンスターの数
 
-    private bool isSpawning = false;         // スポーン中かどうかをチェック
-
-    private void Update()
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        // プレイヤーとの距離を計算
-        float distance = Vector2.Distance(transform.position, player.transform.position);
-
-        // プレイヤーが指定の距離内にいる場合、スポーン処理を開始
-        if (distance <= triggerDistance && !isSpawning)
+        if (other.CompareTag("Player"))
         {
-            StartCoroutine(SpawnMonsters());
+            SpawnMonsters();
         }
     }
 
-    private IEnumerator SpawnMonsters()
+    private void SpawnMonsters()
     {
-        isSpawning = true;
-
-        foreach (Transform spawnPoint in spawnPoints)
+        // 指定した数だけモンスターをスポーンさせる
+        for (int i = 0; i < numberOfMonsters; i++)
         {
             Instantiate(monsterPrefab, spawnPoint.position, Quaternion.identity);
-            yield return new WaitForSeconds(spawnInterval); // 次のモンスターをスポーンさせるまで待機
         }
-
-        isSpawning = false; // スポーン処理が完了
     }
 }

@@ -8,6 +8,9 @@ TagManager:
   - Ground
   - Monster
   - Bullet
+  - Wall
+  - Muzll
+  - Spawn
   layers:
   - Default
   - TransparentFX

@@ -7,6 +7,9 @@ public class Player : MonoBehaviour
     private bool isGrounded = false; // プレイヤーが地面にいるかどうか
     private bool canDoubleJump = true; // ダブルジャンプが可能かどうか
     private Rigidbody2D rb; // Rigidbody2D コンポーネント
+    public GameObject bulletPrefab; // 弾のプレハブ
+    public Transform firePoint; // 弾の発射位置
+    public float bulletSpeed = 10f; // 弾の速度
 
     void Start()
     {
@@ -19,21 +22,21 @@ public class Player : MonoBehaviour
         float moveInput = Input.GetAxis("Horizontal");
 
         // スプライトの向きを変更
-        if (moveInput > 0)
-        {
-            // 右に移動する場合
-            if (transform.localScale.x < 0)
-            {
-                // 左向きから右向きに変更
-                transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
-            }
-        }
-        else if (moveInput < 0)
+        if (moveInput < 0)
         {
             // 左に移動する場合
             if (transform.localScale.x > 0)
             {
                 // 右向きから左向きに変更
+                transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+            }
+        }
+        else if (moveInput > 0)
+        {
+            // 右に移動する場合
+            if (transform.localScale.x < 0)
+            {
+                // 左向きから右向きに変更
                 transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
             }
         }
@@ -55,12 +58,69 @@ public class Player : MonoBehaviour
                 canDoubleJump = false; // ダブルジャンプを一度だけ可能に
             }
         }
+
+        // 弾の発射処理
+        if (Input.GetMouseButtonDown(0)) // 左クリック
+        {
+            Shoot();
+        }
     }
 
     void Jump()
     {
         rb.velocity = new Vector2(rb.velocity.x, jumpForce); // ジャンプの力を加える
     }
+
+    void Shoot()
+    {
+        if (bulletPrefab && firePoint)
+        {
+            // マウスカーソルの位置を取得
+            Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            mousePosition.z = 0; // 2Dなのでz軸は無視
+
+            // プレイヤーの向きに応じた発射方向を計算
+            Vector2 shootDirection = (mousePosition - firePoint.position).normalized;
+
+            // プレイヤーが左を向いている場合、発射方向にマイナスをかける
+            if (transform.localScale.x < 0)
+            {
+                shootDirection = new Vector2(-shootDirection.x, shootDirection.y); // 発射方向を反転
+            }
+
+            // 発射方向の角度を計算
+            float angle = Vector2.SignedAngle(Vector2.right, shootDirection);
+
+            // 発射範囲を設定
+            if (transform.localScale.x > 0) // 右向き
+            {
+                if (angle < -60 || angle > 60) return; // 範囲外
+            }
+            else // 左向き
+            {
+                if (angle > 60 || angle < -60) return; // 範囲外
+            }
+
+            // 弾を発射
+            GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
+            Rigidbody2D bulletRb = bullet.GetComponent<Rigidbody2D>();
+            if (bulletRb)
+            {
+                // プレイヤーが左を向いているとき、弾の進む向きも反転
+                if (transform.localScale.x < 0)
+                {
+                    bulletRb.velocity = new Vector2(-shootDirection.x, shootDirection.y) * bulletSpeed;
+                }
+                else
+                {
+                    bulletRb.velocity = shootDirection * bulletSpeed;
+                }
+            }
+        }
+    }
+
+
+
 
     private void OnCollisionEnter2D(Collision2D collision)
     {

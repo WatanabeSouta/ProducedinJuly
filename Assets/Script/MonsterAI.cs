@@ -2,20 +2,47 @@ using UnityEngine;
 
 public class MonsterAI : MonoBehaviour
 {
-    public Transform player; // プレイヤーのTransformを設定
-    public float moveSpeed = 2f; // モンスターの移動速度
+    public GameObject player; // ここにプレイヤーオブジェクトを割り当てる
+    public float speed = 2.0f; // モンスターの移動速度
+
+    private void Start()
+    {
+        // playerが割り当てられていなければ、自動で探して設定
+        if (player == null)
+        {
+            player = GameObject.FindWithTag("Player");
+        }
+    }
 
     private void Update()
     {
-        // プレイヤーまでの距離を計算
-        float distance = Vector2.Distance(transform.position, player.position);
-
-        // プレイヤーが指定した距離以内にいる場合
-        if (distance < 10f) // ここで距離の範囲を設定
+        if (player != null)
         {
-            // プレイヤーの方に向かって移動
-            Vector2 direction = (player.position - transform.position).normalized;
-            transform.position = Vector2.MoveTowards(transform.position, player.position, moveSpeed * Time.deltaTime);
+            // プレイヤーの位置を取得
+            Vector3 playerPosition = player.transform.position;
+
+            // モンスターの位置を取得
+            Vector3 monsterPosition = transform.position;
+
+            // プレイヤーに向かって移動するためのベクトルを計算
+            Vector3 direction = (playerPosition - monsterPosition).normalized;
+
+            // Rigidbody2Dコンポーネントを取得
+            Rigidbody2D rb = GetComponent<Rigidbody2D>();
+            if (rb != null)
+            {
+                // プレイヤーの方向に移動
+                rb.velocity = direction * speed;
+            }
+        }
+        else
+        {
+            // playerがnullの場合、速度をゼロにする
+            Rigidbody2D rb = GetComponent<Rigidbody2D>();
+            if (rb != null)
+            {
+                rb.velocity = Vector2.zero;
+            }
         }
     }
 }

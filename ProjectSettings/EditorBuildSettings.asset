@@ -17,4 +17,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/HajimarinoScene.unity
     guid: dfb9e5f536f1c654592cddc4aa50a632
+  - enabled: 1
+    path: Assets/Scenes/GameOverScene.unity
+    guid: 4531101fb7c0fc64496e24af36b6f896
+  - enabled: 1
+    path: Assets/Scenes/ClearScene.unity
+    guid: 95fea0acf889ff146bdf4c7b0845e9d0
   m_configObjects: {}

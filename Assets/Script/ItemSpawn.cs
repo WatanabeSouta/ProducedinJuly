@@ -27,7 +27,8 @@ public class ItemSpawn : MonoBehaviour
             );
 
             // •¨‚ğoŒ»‚³‚¹‚é
-            Instantiate(itemPrefab, spawnPosition, Quaternion.identity);
+            GameObject spawnedItem = Instantiate(itemPrefab, spawnPosition, Quaternion.identity);
+            spawnedItem.tag = "Isi"; // ƒ^ƒO‚ğİ’è
         }
     }
 }

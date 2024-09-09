@@ -11,6 +11,12 @@ TagManager:
   - Wall
   - Muzll
   - Spawn
+  - Yuka
+  - Wind
+  - EffectArea
+  - Baria
+  - Isi
+  - Delete
   layers:
   - Default
   - TransparentFX
@@ -20,7 +26,7 @@ TagManager:
   - UI
   - 
   - 
-  - 
+  - Ignore Raycast
   - 
   - 
   - 

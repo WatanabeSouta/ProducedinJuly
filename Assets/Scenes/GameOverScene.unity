@@ -140,7 +140,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &10441983
 RectTransform:
   m_ObjectHideFlags: 0
@@ -491,8 +491,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myButton: {fileID: 457902374}
-  sceneName: GameGamenn
-  soundClip: {fileID: 0}
+  sceneName: HajimarinoScene
+  soundClip: {fileID: 8300000, guid: 9233f1fc01c0e5443ace726e06dd49d2, type: 3}
   delayBeforeTransition: 1
 --- !u!114 &457902374
 MonoBehaviour:
@@ -1049,8 +1049,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myButton: {fileID: 1130155570}
-  sceneName: HajimarinoScene
-  soundClip: {fileID: 0}
+  sceneName: GameGamenn
+  soundClip: {fileID: 8300000, guid: 9233f1fc01c0e5443ace726e06dd49d2, type: 3}
   delayBeforeTransition: 1
 --- !u!114 &1130155570
 MonoBehaviour:
@@ -1482,7 +1482,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1644802104
 RectTransform:
   m_ObjectHideFlags: 0

@@ -6503,7 +6503,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 1
   damage: 5
-  hitSound: {fileID: 8300000, guid: d6a4db6a3874a3a419b9b4a55777148d, type: 3}
+  hitSound: {fileID: 8300000, guid: b01e23464ab1d6b42a325d18bb9c07d1, type: 3}
 --- !u!1 &947202488 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8171570349244869537, guid: 797acd041cfd8c940a93537606ee7255, type: 3}
@@ -6523,7 +6523,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   monsterPrefab: {fileID: 1165562458}
   spawnPoint: {fileID: 990928004}
-  numberOfMonsters: 2
+  numberOfMonsters: 3
   spawnInterval: 1
 --- !u!1 &957199604
 GameObject:

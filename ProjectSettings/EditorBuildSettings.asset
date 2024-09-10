@@ -9,14 +9,14 @@ EditorBuildSettings:
     path: Assets/Scenes/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
+    path: Assets/Scenes/HajimarinoScene.unity
+    guid: dfb9e5f536f1c654592cddc4aa50a632
+  - enabled: 1
     path: Assets/Scenes/ProducedinAugust.unity
     guid: 3bcb7abe69abd5045a815cfa0dc8126d
   - enabled: 1
     path: Assets/Scenes/GameGamenn.unity
     guid: f0a2e56a4d25bb04f914ca1261d4da8f
-  - enabled: 1
-    path: Assets/Scenes/HajimarinoScene.unity
-    guid: dfb9e5f536f1c654592cddc4aa50a632
   - enabled: 1
     path: Assets/Scenes/GameOverScene.unity
     guid: 4531101fb7c0fc64496e24af36b6f896
